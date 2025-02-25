@@ -1,68 +1,75 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
+.primary-header{
+  width: 100%;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  border: solid;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.primary-header ul{
+  border-radius: 30px;
+  padding: 10px 30px;
+  box-shadow: 0px 0px 20px rgb(185, 184, 185);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.primary-header ul li{
+  display: inline-block;
+  padding: 0px 5px;
+  margin: 0px 10px;
+}
+
+.primary-header img {
+  width: 130px;
+  margin: 0px;
+}
+
+.primary-header button{
+  background-color: black;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px rgb(56, 55, 56);
+  padding: 12px 45px;
+  outline: 0;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.primary-header a{
+  text-decoration: none;
+  color: black;
+}
+
+.primary-header a.active{
+  color: rgb(205, 52, 52);
+}
+
+.search-add{
+  padding: 10px;
+  margin: 10px;
+}
+
+.search-add input{
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px;  
+  font-size: 1.2rem;
+}
+
+.search-add button{
+  border-radius: 30px;
+  padding: 15px;
+  margin: 20px; 
+  font-size: 1.2rem;
+  color: white; 
+  background-color: black;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(106, 105, 106, 0.81);
 }
