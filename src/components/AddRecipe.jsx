@@ -48,6 +48,17 @@ const AddRecipe = () => {
     setSpices([...spices, { name: "", quantity: "", unit: "" }]);
   };
 
+  const removeIngredient = (index) => {
+    const updatedIngredients = ingredients.filter((_, i) => i !== index);
+    setIngredients(updatedIngredients);
+  };
+  
+  const removeSpice = (index) => {
+    const updatedSpices = spices.filter((_, i) => i !== index);
+    setSpices(updatedSpices);
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -121,6 +132,7 @@ const AddRecipe = () => {
             <input type="text" placeholder="Name" value={ingredient.name} onChange={(e) => handleIngredientChange(index, "name", e.target.value)} required />
             <input type="text" placeholder="Quantity" value={ingredient.quantity} onChange={(e) => handleIngredientChange(index, "quantity", e.target.value)} required />
             <input type="text" placeholder="Unit" value={ingredient.unit} onChange={(e) => handleIngredientChange(index, "unit", e.target.value)} required />
+            <button type="button" onClick={() => removeIngredient(index)} disabled={ingredients.length <= 1}>Remove</button>
           </div>
         ))}
         <button type="button" onClick={addIngredient}>Add Ingredient</button>
@@ -131,9 +143,11 @@ const AddRecipe = () => {
             <input type="text" placeholder="Name" value={spice.name} onChange={(e) => handleSpiceChange(index, "name", e.target.value)} required />
             <input type="text" placeholder="Quantity" value={spice.quantity} onChange={(e) => handleSpiceChange(index, "quantity", e.target.value)} required />
             <input type="text" placeholder="Unit" value={spice.unit} onChange={(e) => handleSpiceChange(index, "unit", e.target.value)} required />
+            <button type="button" onClick={() => removeSpice(index)} disabled={spices.length <= 1}>Remove</button>
           </div>
         ))}
         <button type="button" onClick={addSpice}>Add Spice</button>
+
 
         <h3>Upload Image</h3>
         <input type="file" accept="image/*" onChange={handleImageChange} required />

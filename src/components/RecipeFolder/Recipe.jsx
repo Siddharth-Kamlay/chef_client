@@ -9,7 +9,7 @@ const Recipe = ({ recipes }) => {
     <div className={styles.recipe_container}>
       {recipes.map(recipe => (
         <Link key={recipe._id} to={`/recipe/${recipe._id}`} className={styles.recipe_card}>
-          <img src={`http://localhost:5000/${recipe.image}`} alt={recipe.name} className={styles.recipe_img} />
+          <img src={recipe.image} alt={recipe.name} className={styles.recipe_img} />
           <h2>{recipe.name}</h2>
           <br />
           <h3>Region: {recipe.region}</h3>

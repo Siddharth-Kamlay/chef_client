@@ -33,7 +33,7 @@ const RecipeDetail = () => {
     <div >
       <h1>{recipe.name}</h1>
       <img
-        src={`http://localhost:5000/${recipe.image}`}
+        src={recipe.image}
         alt={recipe.name}
       />
       <p><strong>Region:</strong> {recipe.region}</p>
