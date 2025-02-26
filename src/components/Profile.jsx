@@ -12,7 +12,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserRecipes = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/user-recipes', {
+        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-recipes', {
           headers: { 'x-auth-token': token }, // Use token from context
         });
         setUserRecipes(res.data);

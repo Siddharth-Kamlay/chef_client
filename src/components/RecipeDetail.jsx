@@ -13,7 +13,7 @@ const RecipeDetail = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/recipes/${id}`);
+        const res = await axios.get(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${id}`);
         setRecipe(res.data);
       } catch (err) {
         setError('Error loading recipe details');
