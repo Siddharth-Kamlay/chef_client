@@ -97,7 +97,7 @@ const AddRecipe = () => {
   
     try {
       console.log([...formDataToSend.entries()]);
-      const response = await axios.post("http://localhost:5000/api/add-recipes", formDataToSend, {
+      const response = await axios.post("https://chef-server-ab7f1dad1bb4.herokuapp.com/api/add-recipes", formDataToSend, {
         headers: {
           "x-auth-token": token,
           "Content-Type": "multipart/form-data",
