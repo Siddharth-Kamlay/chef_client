@@ -1,20 +1,34 @@
 /* eslint-disable no-unused-vars */
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const RecipeDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentUserId, setCurrentUserId] = useState(null); // Store current user ID
+  const [isOwner, setIsOwner] = useState(false);
 
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
         const res = await axios.get(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${id}`);
         setRecipe(res.data);
+
+        const userRes = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/get-user-id', {
+          headers: {
+            'x-auth-token': localStorage.getItem('token'),  // Get token from localStorage (or wherever it's stored)
+          },
+        });
+        setCurrentUserId(userRes.data.userId);
+
+        if (res.data.userId === userRes.data.userId) {
+          setIsOwner(true);
+        }
       } catch (err) {
         setError('Error loading recipe details');
       } finally {
@@ -24,6 +38,19 @@ const RecipeDetail = () => {
 
     fetchRecipe();
   }, []);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${id}`, {
+        headers: {
+          'x-auth-token': localStorage.getItem('token'), // Add the auth token to headers for authorization
+        },
+      });
+      navigate('/'); // Redirect to the list of recipes after deleting
+    } catch (err) {
+      setError('Error deleting recipe');
+    }
+  };
 
   if (loading) return <h1>Loading...</h1>;
   if (error) return <h1>{error}</h1>;
@@ -58,6 +85,11 @@ const RecipeDetail = () => {
           <li key={index}>{spice.name} - {spice.quantity} {spice.unit}</li>
         ))}
       </ul>
+      {isOwner && (
+        <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>
+          Delete Recipe
+        </button>
+      )}
     </div>
   );
 };
