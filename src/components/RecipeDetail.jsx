@@ -19,15 +19,21 @@ const RecipeDetail = () => {
         const res = await axios.get(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${id}`);
         setRecipe(res.data);
 
-        const userRes = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/get-user-id', {
-          headers: {
-            'x-auth-token': localStorage.getItem('token'),  // Get token from localStorage (or wherever it's stored)
-          },
-        });
-        setCurrentUserId(userRes.data.userId);
+        const token = localStorage.getItem('token');
 
-        if (res.data.userId === userRes.data.userId) {
-          setIsOwner(true);
+        if (token) {
+          // If user is logged in, fetch the user ID to check ownership
+          const userRes = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/get-user-id', {
+            headers: {
+              'x-auth-token': token,  // Get token from localStorage
+            },
+          });
+          setCurrentUserId(userRes.data.userId);
+
+          // Check if the logged-in user is the owner of the recipe
+          if (res.data.userId === userRes.data.userId) {
+            setIsOwner(true);
+          }
         }
       } catch (err) {
         setError('Error loading recipe details');
