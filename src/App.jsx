@@ -8,6 +8,7 @@ import SignUp from './components/SignUp'
 import Login from './components/Login'
 import AddRecipe from './components/AddRecipe'
 import Profile from './components/Profile'
+import RecipesByTag from './components/RecipesByTag'
 import { AuthProvider } from './components/AuthContext'
 import { useContext } from 'react'
 import AuthContext from './components/AuthContext'
@@ -36,6 +37,7 @@ function App() {
           <Route path="recipe/:id" element={<RecipeDetail />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="login" element={<Login />} />
+          <Route path="/recipes-by-tag/:tag" element={<RecipesByTag />} />
           <Route path="add-recipe" element={<PrivateRoute><AddRecipe /></PrivateRoute>} />
           <Route path="profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
         </Routes>

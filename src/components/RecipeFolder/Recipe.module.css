@@ -1,35 +1,142 @@
-.recipe_container{
-    display: flex;
-    flex-wrap: wrap; /* This allows the items to move to the next row when necessary */
-    justify-content: space-between; /* Distribute space between the items */
-    gap: 20px; /* Space between the items */
-    margin-top: 20px;
+/* Recipe.module.css */
+.recipe_container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem;
 }
 
-.recipe_card{
-    border-radius: 15px;
-    padding: 10px;
-    padding-top: 0px;
-    width: 30%; /* Set to 30% to fit 3 items per row */
-    height: 400px;
-    cursor: pointer;
-    box-shadow: 0px 0px 20px rgb(56, 55, 56);
-    text-decoration: none;
-    color: black;
-    margin-bottom: 20px; /* Ensure some space at the bottom between rows */
+.region_section {
+  margin-bottom: 2rem;
 }
 
-.recipe_card .recipe_img{
-    width: 100%;
-    height: 200px;
-    padding: 10px;
-    border-radius: 20px;
+.region_section h1 {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-.recipe_tags{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;  
-    align-items: center;
-    text-align: center; 
+.region_cards {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  gap: 1.5rem;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  padding-bottom: 1rem; /* Add padding at the bottom to ensure content doesn’t get cut off */
+  scroll-snap-type: x mandatory; /* Ensure smooth snapping of cards */
+}
+
+.recipe_card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  flex-shrink: 0; /* Prevent cards from shrinking */
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  scroll-snap-align: start; /* Ensure cards align neatly when scrolling */
+  width: 250px;
+}
+
+.recipe_card:hover {
+  transform: translateY(-5px);
+}
+
+.recipe_img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.recipe_card h2 {
+  font-size: 1.4rem;
+  color: #333;
+  margin: 0;
+  text-align: center;
+}
+
+.recipe_card h3 {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.recipe_card p {
+  font-size: 1rem;
+  color: #888;
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.recipe_tags {
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.tag_link {
+  background-color: #f1f1f1;
+  color: rgb(28, 121, 235);
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.tag_link:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.buttons_container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e1e1e1;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  margin: 0px;
+}
+
+.save_button:hover {
+  background-color: #218838;
+}
+
+.share_button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.share_button:hover {
+  background-color: #0056b3;
+}
+
+.share_icon {
+  font-size: 1.2rem;
+}
+
+.recipe_link {
+  text-decoration: none;
+}
+
+.recipe_card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }

@@ -1,37 +1,54 @@
-*{
-  margin: 0px;
-  padding: 0px;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   font-family: sans-serif;
 }
 
-.primary-header{
+.primary-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 30px;
-  border: solid;
+  padding-left: 0px;
 }
 
-.primary-header ul{
-  border-radius: 30px;
+.primary-header img {
+  width: 130px;
+  margin: 0;
+}
+
+.primary-header nav ul {
+  list-style: none;
   padding: 10px 30px;
+  border-radius: 30px;
   box-shadow: 0px 0px 20px rgb(185, 184, 185);
+  display: flex;
 }
 
-.primary-header ul li{
+.primary-header nav ul li {
   display: inline-block;
   padding: 0px 5px;
   margin: 0px 10px;
 }
 
-.primary-header img {
-  width: 130px;
-  margin: 0px;
+.primary-header nav a {
+  text-decoration: none;
+  color: black;
+  padding: 5px 10px;
 }
 
-.primary-header button{
+.primary-header nav a.active {
+  color: rgb(205, 52, 52);
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.primary-header button {
   background-color: black;
   color: white;
   border-radius: 20px;
@@ -40,35 +57,37 @@
   outline: 0;
   border: none;
   cursor: pointer;
+  height: 40px; /* Adjust the height here to match nav items */
 }
 
-.primary-header a{
-  text-decoration: none;
-  color: black;
+.primary-header .create-account-btn {
+  padding: 10px 30px;  /* Adjust padding for consistency */
+  height: 50px;  /* Same height as the nav items */
+  border-radius: 30px;
 }
 
-.primary-header a.active{
+.primary-header a.active {
   color: rgb(205, 52, 52);
 }
 
-.search-add{
+.search-add {
   padding: 10px;
   margin: 10px;
 }
 
-.search-add input{
+.search-add input {
   border-radius: 10px;
   padding: 15px;
-  margin: 20px;  
+  margin: 20px;
   font-size: 1.2rem;
 }
 
-.search-add button{
+.search-add button {
   border-radius: 30px;
   padding: 15px;
-  margin: 20px; 
+  margin: 20px;
   font-size: 1.2rem;
-  color: white; 
+  color: white;
   background-color: black;
   cursor: pointer;
   box-shadow: 0px 0px 20px rgba(106, 105, 106, 0.81);

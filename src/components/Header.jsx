@@ -13,6 +13,7 @@ const Header = () => {
   };
   
   return (
+    <>
     <header className="primary-header">
       <img src={logo} alt="logo"/>
       <nav>
@@ -30,10 +31,11 @@ const Header = () => {
         </>
       ) : (
         <NavLink to="/signup" aria-label="Create a new account">
-          <button>Create Account</button>
+          <button className="create-account-btn">Create Account</button>
         </NavLink>
       )}
     </header>
+    </>
   )
 }
 
