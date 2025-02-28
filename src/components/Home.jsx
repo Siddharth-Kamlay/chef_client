@@ -12,7 +12,7 @@ const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchType, setSearchType] = useState('ingredients'); // Default to ingredients
+  const [searchType, setSearchType] = useState('name');
   const { isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -100,7 +100,11 @@ const Home = () => {
         </label>
       </div>
       <input ref={inputRef} placeholder={searchType === 'ingredients' ? 'Enter ingredients (comma separated)' : 'Enter recipe name'} type="text" />
-      <button onClick={handleSearch}>Find Recipes</button>
+      <button 
+        onClick={handleSearch}
+        style={{ marginTop: '20px', padding: '15px 50px', fontSize: '20px' }}>
+          Find Recipes
+      </button>
       {loading ? (
         <h1>Loading...</h1>
       ) : error ? (
