@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import styles from './RecipeFolder/Recipe.module.css';
+import { useParams, Link } from 'react-router-dom';  // Import Link
+import styles from './RecipesByTags.module.css';
 
 const RecipesByTag = () => {
   const { tag } = useParams();  // Get the tag from the URL
@@ -11,7 +11,7 @@ const RecipesByTag = () => {
   useEffect(() => {
     const fetchRecipesByTag = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/recipes-by-tag/${tag}`);
+        const response = await axios.get(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes-by-tag/${tag}`);
         setRecipes(response.data);
       } catch (error) {
         console.error('Error fetching recipes by tag:', error);
@@ -33,12 +33,14 @@ const RecipesByTag = () => {
       ) : (
         <div className={styles.recipes_list}>
           {recipes.map((recipe) => (
-            <div key={recipe._id} className={styles.recipe_card}>
-              <img src={recipe.image} alt={recipe.name} />
-              <h2>{recipe.name}</h2>
-              <p>Region: {recipe.region}</p>
-              <p>Difficulty: {recipe.difficultyLevel}</p>
-            </div>
+            <Link to={`/recipe/${recipe._id}`} key={recipe._id} className={styles.recipe_card_link}>
+              <div className={styles.recipe_card}>
+                <img src={recipe.image} alt={recipe.name} />
+                <h2>{recipe.name}</h2>
+                <p>Region: {recipe.region}</p>
+                <p>Difficulty: {recipe.difficultyLevel}</p>
+              </div>
+            </Link>
           ))}
         </div>
       )}

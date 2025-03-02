@@ -13,6 +13,7 @@ const AddRecipe = () => {
     servings: "",
     category: "",
     tags: "",
+    url: "",
   });
 
   const [ingredients, setIngredients] = useState([{ name: "", quantity: "", unit: "" }]);
@@ -80,6 +81,7 @@ const AddRecipe = () => {
     formDataToSend.append("servings", formData.servings);
     formDataToSend.append("category", formData.category);
     formDataToSend.append("tags", formData.tags);
+    formDataToSend.append("url", formData.url);
   
     formDataToSend.append("image", image);
   
@@ -125,6 +127,7 @@ const AddRecipe = () => {
         <input type="number" name="servings" placeholder="Servings" onChange={handleChange} required />
         <input type="text" name="category" placeholder="Category" onChange={handleChange} required />
         <input type="text" name="tags" placeholder="Tags (comma-separated)" onChange={handleChange} required />
+        <input type="text" name="url" placeholder="YouTube Video URL (optional)" onChange={handleChange} />
 
         <h3>Ingredients</h3>
         {ingredients.map((ingredient, index) => (

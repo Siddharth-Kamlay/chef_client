@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styles from './RecipeDetail.module.css'
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -58,45 +59,99 @@ const RecipeDetail = () => {
     }
   };
 
+  const extractYouTubeId = (url) => {
+    const youtubeRegex = /(?:https?:\/\/(?:www\.)?youtube\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/?(\w+)|(?:watch\?v=|embed\/)([a-zA-Z0-9_-]+)(?:[^\w\-_]*[a-zA-Z0-9_-]+)?))/;
+    const matches = url.match(youtubeRegex);
+    return matches ? matches[1] || matches[2] || matches[3] : null;
+  };
+
   if (loading) return <h1>Loading...</h1>;
   if (error) return <h1>{error}</h1>;
   if (!recipe) return <h1>No Recipe Found</h1>;
 
+  const cookingMethod = recipe.cookingMethod;
+
+  const videoId = recipe.url ? extractYouTubeId(recipe.url) : null;
+
   return (
+    <>
     <div >
-      <h1>{recipe.name}</h1>
-      <img
-        src={recipe.image}
-        alt={recipe.name}
-      />
-      <p><strong>Region:</strong> {recipe.region}</p>
-      <p><strong>Difficulty:</strong> {recipe.difficultyLevel}</p>
-      <p><strong>Cooking Method:</strong> {recipe.cookingMethod}</p>
-      <p><strong>Serving Style:</strong> {recipe.servingStyle}</p>
-      <p><strong>Preparation Time:</strong> {recipe.prepTime} min</p>
-      <p><strong>Cooking Time:</strong> {recipe.cookTime} min</p>
-      <p><strong>Total Time:</strong> {recipe.totalTime} min</p>
-      <p><strong>Servings:</strong> {recipe.servings}</p>
-
-      <h3>Ingredients:</h3>
-      <ul>
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index}>{ingredient.name} - {ingredient.quantity} {ingredient.unit}</li>
-        ))}
-      </ul>
-
-      <h3>Spices:</h3>
-      <ul>
-        {recipe.spices.map((spice, index) => (
-          <li key={index}>{spice.name} - {spice.quantity} {spice.unit}</li>
-        ))}
-      </ul>
-      {isOwner && (
-        <button onClick={handleDelete} style={{ backgroundColor: 'red', color: 'white' }}>
-          Delete Recipe
-        </button>
-      )}
     </div>
+    <div className={styles.heading}>
+      <h1>{recipe.name}</h1>
+    </div>
+    <div className={styles.img_details_container}>
+      <div className={styles.img_container}>
+        <img src={recipe.image}/>
+      </div>
+
+      <div className={styles.details_container}>
+        <div className={styles.array_container}>
+          <h3>Ingredients:</h3>
+          <p>
+            {recipe.ingredients.map((ingredient, index) => (
+              <span key={index}>
+                {ingredient.name} - {ingredient.quantity} {ingredient.unit}
+                {index < recipe.ingredients.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </p>
+
+          <h3>Spices:</h3>
+          <p>
+            {recipe.spices.map((spice, index) => (
+              <span key={index}>
+                {spice.name} - {spice.quantity} {spice.unit}
+                {index < recipe.spices.length - 1 ? ", " : ""}
+              </span>
+            ))}
+          </p>
+        </div>
+
+        <div className={styles.recipe_info}>
+          <h3 className={styles.recipe_title}>Region: <span className={styles.recipe_value}>{recipe.region}</span></h3>
+          <h3 className={styles.recipe_title}>Difficulty: <span className={styles.recipe_value}>{recipe.difficultyLevel}</span></h3>
+          <h3 className={styles.recipe_title}>Serving Style: <span className={styles.recipe_value}>{recipe.servingStyle}</span></h3>
+          <h3 className={styles.recipe_title}>Preparation Time: <span className={styles.recipe_value}>{recipe.prepTime} min</span></h3>
+          <h3 className={styles.recipe_title}>Cooking Time: <span className={styles.recipe_value}>{recipe.cookTime} min</span></h3>
+          <h3 className={styles.recipe_title}>Total Time: <span className={styles.recipe_value}>{recipe.totalTime} min</span></h3>
+          <h3 className={styles.recipe_title}>Servings: <span className={styles.recipe_value}>{recipe.servings} min</span></h3>
+        </div>
+
+      </div>
+    </div>
+    <div className={styles.method_url_container}>
+      <div className={styles.cooking_method}>
+        <h3>Cooking Method</h3>
+        {cookingMethod.split("\n").map((step, index) => (
+          <p key={index}>{step}</p>
+        ))}
+      </div>
+      <div className={styles.url}>
+        {videoId && (
+          <div>
+            <h3>Watch Recipe Video:</h3>
+            <iframe
+              width="560"
+              height="315"
+              src={`https://www.youtube.com/embed/${videoId}`}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        )}
+      </div>
+    </div>
+    <div >
+      {isOwner && (
+          <button onClick={handleDelete} className={styles.deleteButton}>
+            Delete Recipe
+          </button>
+        )}
+    </div>
+    </>
+
   );
 };
 

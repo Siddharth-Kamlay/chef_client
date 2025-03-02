@@ -78,6 +78,7 @@ const Home = () => {
   };
 
   return (
+    <>
     <div className="search-add">
       <div>
         <label>
@@ -99,12 +100,18 @@ const Home = () => {
           Search by Recipe Name
         </label>
       </div>
-      <input ref={inputRef} placeholder={searchType === 'ingredients' ? 'Enter ingredients (comma separated)' : 'Enter recipe name'} type="text" />
-      <button 
-        onClick={handleSearch}
-        style={{ marginTop: '20px', padding: '15px 50px', fontSize: '20px' }}>
-          Find Recipes
-      </button>
+
+      <div>
+        <input ref={inputRef} placeholder={searchType === 'ingredients' ? 'Enter ingredients (comma separated)' : 'Enter recipe name'} type="text" />
+        <button 
+          onClick={handleSearch}
+          style={{ marginTop: '20px', padding: '15px 50px', fontSize: '20px' }}>
+            Find Recipes
+        </button>
+      </div>
+    </div>
+
+    <div>
       {loading ? (
         <h1>Loading...</h1>
       ) : error ? (
@@ -112,13 +119,11 @@ const Home = () => {
       ) : (
         <Recipe recipes={recipes} />
       )}
-      <button
-        onClick={handleAddRecipe}
-        style={{ marginTop: '20px', padding: '10px', fontSize: '16px' }}
-      >
+      <button onClick={handleAddRecipe} className='add_recipe'>
         Add Recipe
       </button>
     </div>
+    </>
   );
 };
 

@@ -53,7 +53,7 @@
 .recipe_card h2 {
   font-size: 1.4rem;
   color: #333;
-  margin: 0;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -106,26 +106,71 @@
   margin: 0px;
 }
 
-.save_button:hover {
-  background-color: #218838;
+.save_button,
+.unsave_button {
+  background-color: black; /* Green background */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem; /* Add some padding for a better look */
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+  margin: 10px;
+  border-radius: 30px;
 }
+
+.unsave_button{
+  background-color: grey;
+}
+
+.save_button:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.unsave_button:hover {
+  background-color: rgba(186, 39, 39, 0.91); /* Darker green on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.save_button:disabled {
+  background-color: #d6d6d6; /* Disabled state color */
+  cursor: not-allowed;
+}
+
+.save_button:focus {
+  outline: none; /* Remove outline when focused */
+}
+
 
 .share_button {
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 0.5rem;
-  border-radius: 50%;
+  padding: 1rem; /* Adjust padding to create a circular shape */
+  border-radius: 50%; /* Make it circular */
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex; /* Flexbox to center the icon */
+  justify-content: center; /* Center icon horizontally */
+  align-items: center; /* Center icon vertically */
+  width: 3rem; /* Set the width of the circle */
+  height: 3rem; /* Set the height of the circle */
+  margin: 10px;
 }
 
 .share_button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 .share_icon {
-  font-size: 1.2rem;
+  font-size: 1.5rem; /* Make the icon a bit larger */
+}
+
+.share_button:focus {
+  outline: none;
 }
 
 .recipe_link {
