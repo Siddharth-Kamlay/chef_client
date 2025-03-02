@@ -2,11 +2,34 @@ import styles from './Recipe.module.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FaShareAlt } from 'react-icons/fa';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Recipe = ({ recipes }) => {
   const [loading, setLoading] = useState(false);
+  const [savedRecipes, setSavedRecipes] = useState([]);
+
+  // Fetch saved recipes when component mounts
+  useEffect(() => {
+    const fetchSavedRecipes = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        const response = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-saved-recipes', {
+          headers: {
+            'x-auth-token': token,
+          },
+        });
+
+        setSavedRecipes(response.data.map(recipe => recipe._id));  // Extract recipe IDs
+      } catch (error) {
+        console.error('Error fetching saved recipes:', error);
+      }
+    };
+
+    fetchSavedRecipes();
+  }, []);
 
   if (!recipes || recipes.length === 0) return <h1>No recipes found</h1>;
 
@@ -31,7 +54,7 @@ const Recipe = ({ recipes }) => {
       }
 
       const response = await axios.post(
-        `http://localhost:5000/api/save-recipe/${recipeId}`,
+        `https://chef-server-ab7f1dad1bb4.herokuapp.com/api/save-recipe/${recipeId}`,
         {},
         {
           headers: {
@@ -42,11 +65,49 @@ const Recipe = ({ recipes }) => {
 
       if (response.status === 200) {
         alert('Recipe saved successfully!');
+        setSavedRecipes((prev) => [...prev, recipeId]);  // Add to saved recipes list
       } else {
         alert(response.data.msg || 'Error saving recipe');
       }
     } catch (error) {
       console.error('Error saving recipe:', error);
+      if (error.response) {
+        alert(error.response.data.msg || 'Something went wrong. Please try again.');
+      } else {
+        alert('Network error. Please try again later.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const unsaveRecipe = async (recipeId) => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('You need to log in first!');
+        return;
+      }
+
+      const response = await axios.post(
+        `https://chef-server-ab7f1dad1bb4.herokuapp.com/api/unsave-recipe/${recipeId}`,
+        {},
+        {
+          headers: {
+            'x-auth-token': token,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert('Recipe unsaved successfully!');
+        setSavedRecipes((prev) => prev.filter((id) => id !== recipeId));  // Remove from saved recipes list
+      } else {
+        alert(response.data.msg || 'Error unsaving recipe');
+      }
+    } catch (error) {
+      console.error('Error unsaving recipe:', error);
       if (error.response) {
         alert(error.response.data.msg || 'Something went wrong. Please try again.');
       } else {
@@ -101,22 +162,23 @@ const Recipe = ({ recipes }) => {
                 </div>
 
                 <div className={styles.buttons_container}>
-                  <button
-                    className={styles.save_button}
-                    onClick={() => saveRecipe(recipe._id)}
-                    disabled={loading}
-                    style={{
-                      borderRadius: '30px',
-                      backgroundColor: loading ? '#ccc' : 'black', // Change color when loading
-                      color: 'white',
-                      fontSize: '1rem',
-                      border: 'none',
-                      cursor: loading ? 'not-allowed' : 'pointer', // Disable pointer when loading
-                      transition: 'background-color 0.3s ease',
-                    }}
-                  >
-                    {loading ? 'Saving...' : 'Save Recipe'}
-                  </button>
+                  {savedRecipes.includes(recipe._id) ? (
+                    <button
+                      className={styles.unsave_button}
+                      onClick={() => unsaveRecipe(recipe._id)}
+                      disabled={loading}
+                    >
+                      {loading ? 'Unsaving...' : 'Unsave Recipe'}
+                    </button>
+                  ) : (
+                    <button
+                      className={styles.save_button}
+                      onClick={() => saveRecipe(recipe._id)}
+                      disabled={loading}
+                    >
+                      {loading ? 'Saving...' : 'Save Recipe'}
+                    </button>
+                  )}
                   <button
                     className={styles.share_button}
                     onClick={() => handleShare(recipe._id)}
