@@ -1,0 +1,70 @@
+/* AddRecipe.module.css */
+.formContainer {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+  }
+  
+  .formTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .textareaField {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    height: 150px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin: 10px 0;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .sectionTitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .ingredientSection, .spiceSection {
+    margin-bottom: 20px;
+  }
+  
+  .inputWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .inputWrapper input {
+    width: 30%;
+  }
+  
+  .removeButton {
+    margin-left: 10px;
+    background-color: #f44336;
+  }
+  

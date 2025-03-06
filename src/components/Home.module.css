@@ -1,0 +1,55 @@
+.search_add {
+  padding: 10px;
+  margin: 10px;
+}
+  
+.search_add input {
+  border-radius: 10px;
+  padding: 15px;
+  margin: 20px;
+  font-size: 1.2rem;
+}
+  
+.search_add button {
+  border-radius: 30px;
+  padding: 15px;
+  margin: 20px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  box-shadow: 0px 0px 20px rgba(106, 105, 106, 0.81);
+}
+  
+.add_recipe {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 30px;
+}
+
+@media (max-width: 768px) {
+  .search_add > div {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center;
+  }
+
+  .search_add label {
+    margin-bottom: 10px; /* Add some space between the radio buttons */
+  }
+
+  .search_add input[type="radio"] {
+    margin: 5px 0; /* Adjust spacing for better visual appeal */
+  }
+
+  .search_add input {
+    margin: 10px 0; /* Reduce margin to prevent too much spacing */
+  }
+
+  .search_add button {
+    width: 80%; /* Make the button take up 80% of the container width */
+    margin: 10px 0; /* Reduce margin to prevent too much spacing */
+  }
+}

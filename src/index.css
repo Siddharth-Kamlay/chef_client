@@ -1,102 +1,182 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
+*{
+    font-family: sans-serif;
 }
 
-.primary-header {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 30px;
-  padding-left: 0px;
+.primary-header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
-.primary-header img {
-  width: 130px;
-  margin: 0;
+.primary-header img{
+    width: 130px;
+    height: 80px;
 }
 
-.primary-header nav ul {
-  list-style: none;
-  padding: 10px 30px;
-  border-radius: 30px;
-  box-shadow: 0px 0px 20px rgb(185, 184, 185);
-  display: flex;
+.primary-header .nav_buttons_ham{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.primary-header nav ul li {
-  display: inline-block;
-  padding: 0px 5px;
-  margin: 0px 10px;
+.primary-header .nav_buttons{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.primary-header nav a {
-  text-decoration: none;
-  color: black;
-  padding: 5px 10px;
+.primary-header .nav_buttons_close{
+    display: none;
 }
 
-.primary-header nav a.active {
-  color: rgb(205, 52, 52);
+.primary-header .navs{
+    border: none;
+    border-radius: 30px;
+    width: 70%;
+    height: 100%;
+    box-shadow: 0 0 20px rgba(97, 102, 102, 0.5);
+    transition: box-shadow 0.3s ease-in-out;
 }
 
-.auth-buttons {
-  display: flex;
-  gap: 15px;
+
+.primary-header nav ul{
+    display: flex;
+    list-style-type: none;
+    padding: 0% 25%;
+    justify-content: space-between;
 }
 
-.primary-header button {
-  background-color: black;
-  color: white;
-  border-radius: 20px;
-  box-shadow: 0px 0px 20px rgb(56, 55, 56);
-  padding: 12px 45px;
-  outline: 0;
-  border: none;
-  cursor: pointer;
-  height: 40px; /* Adjust the height here to match nav items */
+
+.primary-header nav ul a{
+    text-decoration: none;
 }
 
-.primary-header .create-account-btn {
-  padding: 10px 30px;  /* Adjust padding for consistency */
-  height: 50px;  /* Same height as the nav items */
-  border-radius: 30px;
+.primary-header nav ul a.active li{
+    color: red;
 }
 
-.primary-header a.active {
-  color: rgb(205, 52, 52);
+.primary-header nav ul a li{
+    color: black;
 }
 
-.search-add {
-  padding: 10px;
-  margin: 10px;
+.hamburger-btn {
+    display: none;
 }
 
-.search-add input {
-  border-radius: 10px;
-  padding: 15px;
-  margin: 20px;
-  font-size: 1.2rem;
+.auth_buttons{
+    display: flex;
+    width: 30%;
+    justify-content: flex-end;
 }
 
-.search-add button {
-  border-radius: 30px;
-  padding: 15px;
-  margin: 20px;
-  font-size: 1.2rem;
-  color: white;
-  background-color: black;
-  cursor: pointer;
-  box-shadow: 0px 0px 20px rgba(106, 105, 106, 0.81);
+.auth_buttons a button{
+    background-color: black;
+    border-radius: 30px;
+    height: 100%;
+    margin-top: 0%;
 }
 
-.add_recipe{
-  background-color: black;
-  color: white;
-  padding: 10px 20px;
-  font-size: 20px;
-  border-radius: 30px;
+.auth_buttons_authenticated {
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.auth_buttons_authenticated button{
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    height: 100%;
+    padding: 15px 35px;
+    box-shadow: 0 0 20px rgba(62, 63, 63, 0.5);
+}
+
+@media (max-width: 768px) {
+
+    .primary-header .nav_buttons_ham{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    
+    .hamburger-btn {
+      display: flex;
+      background-color: black;
+      margin: 0px;
+    }
+
+    .hamburger-btn-close {
+        background-color: black;
+        margin: 0px;
+      }
+
+    .primary-header .nav_buttons{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 0px;
+        position: absolute;
+        top: 100px;
+        background-color: white;
+        width: 50%;
+    }
+
+    .primary-header .navs{
+        border-radius: 5px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        width: 100%;
+    }
+
+    .primary-header nav ul{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .auth_buttons{
+        width: 100%;
+    }
+
+    .auth_buttons a{
+        width: 100%;
+    }
+
+    .auth_buttons a button{
+        width: 100%;
+        border-radius: 5px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    .auth_buttons_authenticated{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-end;
+    }
+
+    .auth_buttons_authenticated a{
+        margin: 0px;
+        width: 100%;
+    }
+
+    .auth_buttons_authenticated button{
+        margin: 0px;
+        width: 100%;
+        border-radius: 5px;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+
+    .auth_buttons_authenticated button.profile{
+        border-radius: 0px;
+    }
 }

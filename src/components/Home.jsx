@@ -6,6 +6,7 @@ import axios from 'axios';
 import Recipe from './RecipeFolder/Recipe';
 import AuthContext from './AuthContext';
 import { useContext } from 'react';
+import styles from './Home.module.css'
 
 const Home = () => {
   const inputRef = useRef(null);
@@ -79,7 +80,7 @@ const Home = () => {
 
   return (
     <>
-    <div className="search-add">
+    <div className={styles.search_add}>
       <div>
         <label>
           <input
@@ -119,7 +120,7 @@ const Home = () => {
       ) : (
         <Recipe recipes={recipes} />
       )}
-      <button onClick={handleAddRecipe} className='add_recipe'>
+      <button onClick={handleAddRecipe} className={styles.add_recipe}>
         Add Recipe
       </button>
     </div>
