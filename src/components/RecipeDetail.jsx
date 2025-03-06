@@ -133,7 +133,7 @@ const RecipeDetail = () => {
             <h3 className={styles.recipe_title}>Preparation Time: <span className={styles.recipe_value}>{recipe.prepTime} min</span></h3>
             <h3 className={styles.recipe_title}>Cooking Time: <span className={styles.recipe_value}>{recipe.cookTime} min</span></h3>
             <h3 className={styles.recipe_title}>Total Time: <span className={styles.recipe_value}>{recipe.totalTime} min</span></h3>
-            <h3 className={styles.recipe_title}>Servings: <span className={styles.recipe_value}>{recipe.servings} min</span></h3>
+            <h3 className={styles.recipe_title}>Servings: <span className={styles.recipe_value}>{recipe.servings}</span></h3>
           </div>
         </div>
       </div>
@@ -149,8 +149,8 @@ const RecipeDetail = () => {
             <div>
               <h3>Watch Recipe Video</h3>
               <iframe
-                width="560"
-                height="315"
+                width="250"
+                height="150"
                 src={`https://www.youtube.com/embed/${videoId}`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -172,7 +172,7 @@ const RecipeDetail = () => {
       <div className={styles.relatedRecipes}> 
         <h3 className={styles.heading}>Recommended Recipes:</h3>
         {relatedRecipes.length > 0 ? (
-          <Recipe recipes={relatedRecipes} />
+          <Recipe recipes={relatedRecipes} showRegion={false} group={false}/>
         ) : (
           <p>No related recipes found</p>
         )}

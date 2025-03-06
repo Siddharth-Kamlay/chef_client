@@ -5,7 +5,7 @@ import { FaShareAlt } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Recipe = ({ recipes }) => {
+const Recipe = ({ recipes, showRegion=true, group=true }) => {
   const [loading, setLoading] = useState(false);
   const [savedRecipes, setSavedRecipes] = useState([]);
 
@@ -133,13 +133,13 @@ const Recipe = ({ recipes }) => {
     }
   };
 
-  const groupedRecipes = groupRecipesByRegion();
+  const groupedRecipes = group ? groupRecipesByRegion():{recipes};
 
   return (
     <div className={styles.recipe_container}>
       {Object.keys(groupedRecipes).map((region) => (
         <div key={region} className={styles.region_section}>
-          <h1>{region}</h1>
+          {showRegion && <h1>{region}</h1>}
           <div className={styles.region_cards}>
             {groupedRecipes[region].map((recipe) => (
               <div key={recipe._id} className={styles.recipe_card}>
@@ -197,6 +197,8 @@ const Recipe = ({ recipes }) => {
 
 Recipe.propTypes = {
   recipes: PropTypes.array.isRequired,
+  showRegion: PropTypes.bool,
+  group: PropTypes.bool
 };
 
 export default Recipe;

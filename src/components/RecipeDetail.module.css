@@ -1,97 +1,97 @@
+/* Default styles for larger screens */
 .heading {
-    display: flex;
-    justify-content: center; /* Centers horizontally */
-    text-align: center; /* Ensures the text itself is centered */
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center; 
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .img_details_container {
-    display: flex;
-    align-items: stretch; /* Makes the height of the image container and details container equal */
-  }
-  
-  .img_container {
-    width: 50%; /* Makes the image container take up half of the horizontal space */
-    display: flex; /* This ensures that the image stretches to fill the container */
-  }
-  
-  .img_container img {
-    width: 100%; /* Ensures the image fills the container */
-    height: 100%; /* Ensures the image stretches to match the container's height */
-    object-fit: cover; /* Maintains the aspect ratio while covering the container */
-    border-radius: 30px;
-  }
-  
-  .details_container {
-    width: 50%; /* Ensures the details container takes up the other half */
-    display: flex;
-    flex-direction: column; /* Ensures the content stacks vertically */
-    justify-content: flex-start; /* Aligns the content to the top */
-    text-align: left; /* Left-aligns everything */
-    padding-left: 20px; /* Optional, for some spacing between the image and details */
-  }
-  
-  .array_container h3 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    margin-top: 20px;
-    text-align: left; /* Left-aligns the heading */
-  }
-  
-  .array_container p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    text-align: left; /* Left-aligns the content */
-  }
-  
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.img_container {
+  width: 50%;
+  display: flex;
+  justify-content: center; /* Center the image inside the container */
+}
+
+.img_container img {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio for mobile */
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.details_container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.array_container h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.array_container p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  text-align: left;
+}
+
 .recipe_info {
-    font-size: 1.1rem;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .recipe_title {
-     /* Title font size */
-    margin-bottom: 10px; /* Optional, for spacing between the titles and values */
-  }
-  
-  .recipe_value {
-    /* font-size: 1.5rem; Value font size */
-    color: #4d4c4c; /* Optional, to make the value stand out */
-    font-weight: normal;
-  }
+  font-size: 1.1rem;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 
-  /* cooking_method.module.css */
-  .method_url_container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px; /* Optional: for spacing between the two sections */
-  }
-  
-  .cooking_method, .url {
-    flex: 1; /* Ensures both sections take up equal space */
-  }
-  
-  .cooking_method {
-    text-align: left; /* Ensures text is aligned to the left */
-  }
-  
-  .cooking_method h3, .url h3 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 1.5rem; /* Increase font size to 1.5rem */
-  }
-  
-  .cooking_method p {
-    margin-bottom: 10px; /* Add bottom margin to each paragraph */
-    font-size: 1.1em;
-  }
-  
-  .url iframe {
-    border-radius: 30px; /* Apply border-radius to the iframe */
-  }
+.recipe_title {
+  margin-bottom: 10px;
+}
 
-  /* MyComponent.module.css */
+.recipe_value {
+  color: #4d4c4c;
+  font-weight: normal;
+}
+
+.method_url_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+.cooking_method, .url {
+  flex: 1;
+  min-width: 250px; /* Prevent the sections from becoming too narrow */
+}
+
+.cooking_method h3, .url h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.cooking_method p {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  text-align: left;
+}
+
+.url iframe {
+  border-radius: 30px;
+  height: 250px;
+  width: 500px;
+}
+
 .deleteButton {
   background-color: black;
   color: white;
@@ -101,14 +101,110 @@
   font-size: 20px;
   border-radius: 30px;
   margin-top: 20px;
+  display: block; /* Ensure button is block-level on small screens */
+  width: 100%;
 }
 
 .deleteButton:hover {
   background-color: rgb(207, 23, 23);
 }
 
-.relatedRecipes .heading{
+.relatedRecipes .heading {
   font-size: 2rem;
   margin-top: 30px;
 }
-  
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .img_details_container {
+    flex-direction: column; /* Stack the image and details vertically */
+  }
+
+  .img_container, .details_container {
+    width: 100%; /* Ensure each section takes full width on smaller screens */
+    padding: 0;
+  }
+
+  .details_container {
+    padding-left: 0; /* Remove left padding */
+  }
+
+  .array_container h3 {
+    font-size: 1.2rem;
+  }
+
+  .array_container p {
+    font-size: 1rem;
+  }
+
+  .recipe_info {
+    font-size: 1rem;
+  }
+
+  .method_url_container {
+    flex-direction: column; /* Stack cooking method and URL sections */
+  }
+
+  .cooking_method, .url {
+    min-width: 100%; /* Allow sections to be full width */
+  }
+
+  .url iframe {
+    border-radius: 30px;
+    height: 270px;
+    width: 360px;
+  }
+
+  .cooking_method h3, .url h3 {
+    font-size: 1.3rem;
+  }
+
+  .cooking_method p {
+    font-size: 1rem;
+  }
+
+  .deleteButton {
+    font-size: 16px; /* Reduce button font size for smaller screens */
+    padding: 8px 16px;
+  }
+
+  .relatedRecipes .heading {
+    font-size: 1.5rem;
+  }
+}
+
+/* Further mobile optimization for very small screens */
+@media (max-width: 480px) {
+  .img_container img {
+    object-fit: contain; /* Prevents image from being cropped */
+  }
+
+  .array_container h3 {
+    font-size: 1rem;
+  }
+
+  .array_container p {
+    font-size: 0.9rem;
+  }
+
+  .recipe_info {
+    font-size: 0.9rem;
+  }
+
+  .method_url_container {
+    gap: 10px; /* Reduce gap between sections */
+  }
+
+  .cooking_method, .url {
+    font-size: 1rem;
+  }
+
+  .deleteButton {
+    font-size: 14px; /* Smaller font size for the delete button */
+    padding: 6px 12px;
+  }
+
+  .relatedRecipes .heading {
+    font-size: 1.2rem;
+  }
+}
