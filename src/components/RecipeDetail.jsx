@@ -49,7 +49,7 @@ const RecipeDetail = () => {
           // Filter out duplicates from the related recipes
           const uniqueRelatedRecipes = [
             ...new Map(allRelatedRecipes.map((recipe) => [recipe._id, recipe])).values(),
-          ];
+          ].filter(recipe => recipe._id !== res.data._id);
 
           setRelatedRecipes(uniqueRelatedRecipes);
         }
