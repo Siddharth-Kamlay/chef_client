@@ -61,7 +61,7 @@ const Profile = () => {
           {userRecipes.length === 0 ? (
             <h2>No recipes added yet</h2>
           ) : (
-            <Recipe recipes={userRecipes} />
+            <Recipe recipes={userRecipes} showRegion={false} group={false}/>
           )}
 
           {/* Section for Saved Recipes */}
