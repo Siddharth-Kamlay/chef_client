@@ -146,11 +146,11 @@ const RecipeDetail = () => {
         </div>
         <div className={styles.url}>
           {videoId && (
-            <div>
+            <div className={styles.url_name_frame}>
               <h3>Watch Recipe Video</h3>
               <iframe
-                width="250"
-                height="150"
+                // width="250"
+                // height="150"
                 src={`https://www.youtube.com/embed/${videoId}`}
                 title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
