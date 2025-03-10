@@ -1,7 +1,5 @@
 /* Default styles for larger screens */
 .heading {
-  display: flex;
-  justify-content: center; 
   text-align: center;
   margin-bottom: 10px;
 }
@@ -9,7 +7,7 @@
 .img_details_container {
   display: flex;
   align-items: stretch;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  gap: 20px;
 }
 
 .img_container {
@@ -31,7 +29,7 @@
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
-  padding-left: 20px;
+  gap: 20px;
 }
 
 .array_container h3 {
@@ -49,8 +47,6 @@
 
 .recipe_info {
   font-size: 1.1rem;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .recipe_title {
@@ -66,12 +62,13 @@
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
 }
 
+.url_name_frame{
+  height: 80%;
+}
 .cooking_method, .url {
-  flex: 1;
-  min-width: 250px; /* Prevent the sections from becoming too narrow */
+  width: 50%;
 }
 
 .cooking_method h3, .url h3 {
@@ -88,8 +85,8 @@
 
 .url iframe {
   border-radius: 30px;
-  height: 250px;
-  width: 500px;
+  height: 100%;
+  width: 75%;
 }
 
 .deleteButton {
@@ -150,9 +147,7 @@
   }
 
   .url iframe {
-    border-radius: 30px;
-    height: 270px;
-    width: 360px;
+    width: 100%;
   }
 
   .cooking_method h3, .url h3 {
