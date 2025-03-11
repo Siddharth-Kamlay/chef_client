@@ -57,6 +57,38 @@ const predefinedIngredientsMapping = {
   ]
 };
 
+const predefinedSpicesMapping = {
+  Italian: [
+    { name: "Oregano", quantity: "", unit: "tsp" },
+    { name: "Basil", quantity: "", unit: "tsp" },
+    { name: "Rosemary", quantity: "", unit: "tsp" }
+  ],
+  Chinese: [
+    { name: "Five-Spice Powder", quantity: "", unit: "tsp" },
+    { name: "Sichuan Peppercorns", quantity: "", unit: "tsp" },
+    { name: "Star Anise", quantity: "", unit: "pcs" }
+  ],
+  French: [
+    { name: "Herbes de Provence", quantity: "", unit: "tsp" },
+    { name: "Nutmeg", quantity: "", unit: "tsp" },
+    { name: "Bay Leaf", quantity: "", unit: "pcs" }
+  ],
+  "North Indian": [
+    { name: "Garam Masala", quantity: "", unit: "tsp" },
+    { name: "Coriander Powder", quantity: "", unit: "tsp" },
+    { name: "Cumin Powder", quantity: "", unit: "tsp" }
+  ],
+  "South Indian": [
+    { name: "Curry Powder", quantity: "", unit: "tsp" },
+    { name: "Red Chili Powder", quantity: "", unit: "tsp" },
+    { name: "Black Pepper", quantity: "", unit: "tsp" }
+  ],
+  Mexican: [
+    { name: "Cumin", quantity: "", unit: "tsp" },
+    { name: "Chili Powder", quantity: "", unit: "tsp" },
+    { name: "Paprika", quantity: "", unit: "tsp" }
+  ]
+};
 
 const AddRecipe = () => {
   const [formData, setFormData] = useState({
@@ -121,9 +153,14 @@ const AddRecipe = () => {
     // If there are predefined ingredients for the selected region, update the ingredients.
     if (predefinedIngredientsMapping[regionValue]) {
       setIngredients(predefinedIngredientsMapping[regionValue]);
-    } else {
+    }
+    if (predefinedSpicesMapping[regionValue]) {
+      setSpices(predefinedSpicesMapping[regionValue]);
+    }
+    else {
       // If not, allow manual input.
       setIngredients([{ name: "", quantity: "", unit: "" }]);
+      setSpices([{ name: "", quantity: "", unit: "" }]);
     }
   };
 
