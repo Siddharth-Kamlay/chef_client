@@ -1,23 +1,102 @@
-/* AddRecipe.module.css */
 .formContainer {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f8f8f8;
-    border-radius: 8px;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+.formTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 10px 0;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.intialInfo{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 20px; /* Space between the columns */
+}
+
+.createSelect{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.inputField{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.textArea{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.textareaField {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  height: 150px;
+}
+
+.inputWrapper{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.inputWrapper .inputOther{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.removeButton{
+  background-color: #f44336;
+}
+
+.image{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+@media (max-width: 768px) {
+  .intialInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .formTitle {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
+
   .inputField {
     width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  }
+
+  .createSelect{
+    width: 88%;
   }
   
   .textareaField {
@@ -29,20 +108,6 @@
     height: 150px;
   }
   
-  button {
-    padding: 10px 20px;
-    margin: 10px 0;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
   
   .sectionTitle {
     font-size: 18px;
@@ -53,18 +118,46 @@
     margin-bottom: 20px;
   }
   
-  .inputWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .inputWrapper{
+    flex-direction: column;
   }
   
-  .inputWrapper input {
-    width: 30%;
+  .inputWrapper .inputOther{
+    display: flex;
+    flex-direction: row;
+    width: 88%;
+    gap: 5px;
+  }
+  
+  .inputFieldButton{
+    width: 88%;
   }
   
   .removeButton {
-    margin-left: 10px;
     background-color: #f44336;
   }
   
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .selectField{
+    width: 89%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .textArea{
+    justify-content: center;
+  }
+
+  .image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+}

@@ -128,11 +128,7 @@ const RecipeDetail = () => {
 
           <div className={styles.recipe_info}>
             <h3 className={styles.recipe_title}>Region: <span className={styles.recipe_value}>{recipe.region}</span></h3>
-            <h3 className={styles.recipe_title}>Difficulty: <span className={styles.recipe_value}>{recipe.difficultyLevel}</span></h3>
-            <h3 className={styles.recipe_title}>Serving Style: <span className={styles.recipe_value}>{recipe.servingStyle}</span></h3>
-            <h3 className={styles.recipe_title}>Preparation Time: <span className={styles.recipe_value}>{recipe.prepTime} min</span></h3>
             <h3 className={styles.recipe_title}>Cooking Time: <span className={styles.recipe_value}>{recipe.cookTime} min</span></h3>
-            <h3 className={styles.recipe_title}>Total Time: <span className={styles.recipe_value}>{recipe.totalTime} min</span></h3>
             <h3 className={styles.recipe_title}>Servings: <span className={styles.recipe_value}>{recipe.servings}</span></h3>
           </div>
         </div>

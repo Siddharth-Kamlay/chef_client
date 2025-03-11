@@ -38,7 +38,6 @@ const RecipesByTag = () => {
                 <img src={recipe.image} alt={recipe.name} />
                 <h2>{recipe.name}</h2>
                 <p>Region: {recipe.region}</p>
-                <p>Difficulty: {recipe.difficultyLevel}</p>
               </div>
             </Link>
           ))}
