@@ -147,8 +147,6 @@ const Recipe = ({ recipes, showRegion=true, group=true }) => {
                 <Link to={`/recipe/${recipe._id}`} className={styles.recipe_link}>
                   <img src={recipe.image} alt={recipe.name} className={styles.recipe_img} />
                   <h2>{recipe.name}</h2>
-                  <h3>Region: {recipe.region}</h3>
-                  <p>Difficulty: {recipe.difficultyLevel}</p>
                 </Link>
 
                 {/* Separate links for the tags */}
