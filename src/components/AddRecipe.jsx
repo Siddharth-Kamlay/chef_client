@@ -17,13 +17,13 @@ const predefinedIngredientsMapping = {
     { name: "Olive Oil", quantity: "", unit: "tbsp" },
     { name: "Tomatoes", quantity: "", unit: "large" },
     { name: "Garlic", quantity: "", unit: "cloves" },
-    { name: "Mozzarella Cheese", quantity: "", unit: "grams" },
-    { name: "Pasta", quantity: "", unit: "grams" }
+    { name: "Mozzarella Cheese", quantity: "", unit: "gms" },
+    { name: "Pasta", quantity: "", unit: "gms" }
   ],
   "Chinese": [
     { name: "Soy Sauce", quantity: "", unit: "tbsp" },
     { name: "Rice", quantity: "", unit: "cup" },
-    { name: "Chicken Breast", quantity: "", unit: "grams" },
+    { name: "Chicken Breast", quantity: "", unit: "gms" },
     { name: "Ginger", quantity: "", unit: "tsp" },
     { name: "Green Onion", quantity: "", unit: "stalks" }
   ],
@@ -32,14 +32,14 @@ const predefinedIngredientsMapping = {
     { name: "Cream", quantity: "", unit: "cup" },
     { name: "Eggs", quantity: "", unit: "large" },
     { name: "Flour", quantity: "", unit: "cup" },
-    { name: "Cheese (Gruyère)", quantity: "", unit: "grams" }
+    { name: "Cheese (Gruyère)", quantity: "", unit: "gms" }
   ],
   "North Indian": [
     { name: "Basmati Rice", quantity: "", unit: "cup" },
     { name: "Yogurt", quantity: "", unit: "cup" },
     { name: "Onion", quantity: "", unit: "medium" },
     { name: "Tomato", quantity: "", unit: "large" },
-    { name: "Chicken Breast", quantity: "", unit: "grams" }
+    { name: "Chicken Breast", quantity: "", unit: "gms" }
   ],
   "South Indian": [
     { name: "Rice", quantity: "", unit: "cup" },
@@ -52,7 +52,7 @@ const predefinedIngredientsMapping = {
     { name: "Tortillas", quantity: "", unit: "large" },
     { name: "Beans (Black or Pinto)", quantity: "", unit: "can" },
     { name: "Avocado", quantity: "", unit: "medium" },
-    { name: "Cheese (Cheddar or Cotija)", quantity: "", unit: "grams" },
+    { name: "Cheese (Cheddar or Cotija)", quantity: "", unit: "gms" },
     { name: "Lime", quantity: "", unit: "medium" }
   ]
 };
