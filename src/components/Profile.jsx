@@ -22,7 +22,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserDetails = async() =>{
       try{
-        const res = await axios.get('http://localhost:5000/api/user-details',{
+        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-details',{
           headers:{'x-auth-token': token},
         });
         setUserDetails(res.data);
@@ -85,7 +85,7 @@ const Profile = () => {
 
     try {
       const res = await axios.put(
-        'http://localhost:5000/api/change-password',
+        'https://chef-server-ab7f1dad1bb4.herokuapp.com/api/change-password',
         { oldPassword, newPassword },
         { headers: { 'x-auth-token': token } }
       );
