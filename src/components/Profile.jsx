@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState, useContext } from 'react';
+import { FaUser, FaEnvelope } from 'react-icons/fa';
 import axios from 'axios';
 import Recipe from './RecipeFolder/Recipe';
 import AuthContext from './AuthContext';
@@ -92,6 +93,7 @@ const Profile = () => {
       setOldPassword('');
       setNewPassword('');
       setConfirmPassword('');
+      console.log(passwordChangeMessage)
     } catch (err) {
       setPasswordChangeMessage('Error changing password');
     }
@@ -109,61 +111,61 @@ const Profile = () => {
         <h1>{error}</h1>
       ) : (
         <>
+          <h1>User Details</h1>
           <div className={styles.deatils_pass}> 
             {userDetails && (
-              <div>
-                <h1>User Details</h1>
-                <div>
-                  <p><strong>Username:</strong> {userDetails.username}</p>
-                  <p><strong>Email:</strong> {userDetails.email}</p>
-                </div>
+              <div className={styles.details}>
+                <p><FaUser /> &nbsp; &nbsp;<strong>Name :</strong>&nbsp;{userDetails.username}</p>
+                <p><FaEnvelope /> &nbsp; &nbsp;<strong>Email :</strong>&nbsp;{userDetails.email}</p>
               </div>
             )}
 
-            {/* Button to toggle password change form */}
-            <button onClick={togglePasswordChangeForm}>
-              {showPasswordChangeForm ? 'Cancel' : 'Update Password'}
-            </button>
+            <div>
+              <button className={styles.update_btn} onClick={togglePasswordChangeForm}>
+                {showPasswordChangeForm ? 'Cancel' : 'Update Password'}
+              </button>
 
-            {showPasswordChangeForm && 
-              <div className={styles.formContainer}>
-                {/* Password Change Form */}
-                <h2>Change Password</h2>
-                {passwordChangeMessage && <p>{passwordChangeMessage}</p>}
-                <form onSubmit={handlePasswordChange}>
-                  <div className={styles.form_group}>
-                    <label>Old Password</label>
-                    <input
-                      type="password"
-                      value={oldPassword}
-                      onChange={(e) => setOldPassword(e.target.value)}
-                      required
-                    />
+              {showPasswordChangeForm && 
+                <>
+                  <div className={styles.modalBackdrop} onClick={togglePasswordChangeForm}></div> {/* Modal Backdrop */}
+                  <div className={styles.formContainer}>
+                    <h2>Change Password</h2>
+                    {passwordChangeMessage && <p>{passwordChangeMessage}</p>}
+                    <form onSubmit={handlePasswordChange}>
+                      <div className={styles.form_group}>
+                        <input
+                          type="password"
+                          value={oldPassword}
+                          onChange={(e) => setOldPassword(e.target.value)}
+                          placeholder="Old Password"
+                          required
+                        />
+                      </div>
+                      <div className={styles.form_group}>
+                        <input
+                          type="password"
+                          value={newPassword}
+                          onChange={(e) => setNewPassword(e.target.value)}
+                          placeholder="New Password"
+                          required
+                        />
+                      </div>
+                      <div className={styles.form_group}>
+                        <input
+                          type="password"
+                          value={confirmPassword}
+                          onChange={(e) => setConfirmPassword(e.target.value)}
+                          placeholder="Confirm New Password"
+                          required
+                        />
+                      </div>
+                      <button className={styles.submit_btn} type="submit">Change Password</button>
+                    </form>
                   </div>
-                  <div className={styles.form_group}>
-                    <label>New Password</label>
-                    <input
-                      type="password"
-                      value={newPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className={styles.form_group}>
-                    <label>Confirm New Password</label>
-                    <input
-                      type="password"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <button className={styles.submit_btn} type="submit">Change Password</button>
-                </form>
-              </div>
-            }
+                </>
+              }
+            </div>
           </div>
-          
 
           <h1>Your Added Recipes</h1>
           {userRecipes.length === 0 ? (
