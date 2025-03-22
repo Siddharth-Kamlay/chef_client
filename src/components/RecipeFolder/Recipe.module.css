@@ -185,3 +185,13 @@
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
+.starIcon {
+  color: #FFB800; /* Yellow color for the stars */
+  font-size: 18px; /* Adjust the size of the stars */
+}
+
+.recipe_rating{
+  display: flex;
+  justify-content: center;
+}
