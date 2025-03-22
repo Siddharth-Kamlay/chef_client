@@ -1,11 +1,11 @@
 import styles from './Recipe.module.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FaShareAlt } from 'react-icons/fa';
+import { FaShareAlt, FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';  // Import React Icons for stars
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Recipe = ({ recipes, showRegion=true, group=true }) => {
+const Recipe = ({ recipes, showRegion = true, group = true }) => {
   const [loading, setLoading] = useState(false);
   const [savedRecipes, setSavedRecipes] = useState([]);
 
@@ -133,7 +133,41 @@ const Recipe = ({ recipes, showRegion=true, group=true }) => {
     }
   };
 
-  const groupedRecipes = group ? groupRecipesByRegion():{recipes};
+  // Function to calculate average rating
+  const calculateAverageRating = (ratings) => {
+    if (!ratings || ratings.length === 0) return 0;
+
+    const total = ratings.reduce((acc, rating) => acc + rating.rating, 0);
+    return (total / ratings.length).toFixed(1);  // Round to 1 decimal place
+  };
+
+  // Function to render stars based on average rating
+  const renderStars = (averageRating) => {
+    const fullStars = Math.floor(averageRating); // Number of full stars (e.g., 4 for 4.5)
+    const halfStars = averageRating % 1 >= 0.5 ? 1 : 0; // If rating has a half-star (e.g., 4.5)
+
+    let stars = [];
+    
+    // Full stars (filled)
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<FaStar key={`full-${i}`} className={styles.starIcon} />);
+    }
+
+    // Half star (half-filled)
+    if (halfStars > 0) {
+      stars.push(<FaStarHalfAlt key="half" className={styles.starIcon} />);
+    }
+
+    // Empty stars (optional - you can choose to omit them)
+    const emptyStars = 5 - fullStars - halfStars;
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<FaRegStar key={`empty-${i}`} className={styles.starIcon} />);
+    }
+
+    return stars;
+  };
+
+  const groupedRecipes = group ? groupRecipesByRegion() : { recipes };
 
   return (
     <div className={styles.recipe_container}>
@@ -149,7 +183,12 @@ const Recipe = ({ recipes, showRegion=true, group=true }) => {
                   <h2>{recipe.name}</h2>
                 </Link>
 
-                {/* Separate links for the tags */}
+                {/* Display the average rating as stars */}
+                <div >
+                  <p className={styles.recipe_rating}>Rating:&nbsp;{renderStars(calculateAverageRating(recipe.ratings))}</p>
+                </div>
+
+                {/* Tags Section */}
                 <div className={styles.recipe_tags}>
                   <p>Tags:</p>
                   {recipe.tags.map((ele, index) => (
@@ -196,7 +235,7 @@ const Recipe = ({ recipes, showRegion=true, group=true }) => {
 Recipe.propTypes = {
   recipes: PropTypes.array.isRequired,
   showRegion: PropTypes.bool,
-  group: PropTypes.bool
+  group: PropTypes.bool,
 };
 
 export default Recipe;
