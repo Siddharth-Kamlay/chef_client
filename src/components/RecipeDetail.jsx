@@ -38,7 +38,7 @@ const RecipeDetail = () => {
           }
 
           // Fetch user-rated recipes and check if the user has rated the current recipe
-          const ratedRecipesRes = await axios.get('http://localhost:5000/api/user-rated-recipes', {
+          const ratedRecipesRes = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-rated-recipes', {
             headers: { 'x-auth-token': token },
           });
           const userRatedRecipe = ratedRecipesRes.data.find(r => r.recipeName === res.data.name);
@@ -96,7 +96,7 @@ const RecipeDetail = () => {
     }
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/rate-recipe/${id}`,
+        `https://chef-server-ab7f1dad1bb4.herokuapp.com/api/rate-recipe/${id}`,
         { rating },
         { headers: { 'x-auth-token': token } }
       );
