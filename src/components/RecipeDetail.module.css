@@ -97,9 +97,11 @@
   cursor: pointer;
   font-size: 20px;
   border-radius: 30px;
-  margin-top: 20px;
   display: block; /* Ensure button is block-level on small screens */
-  width: 100%;
+  width: 20%;
+  margin: 0 auto;
+  margin-top: 20px;
+  height: 50px;
 }
 
 .deleteButton:hover {
@@ -109,6 +111,24 @@
 .relatedRecipes .heading {
   font-size: 2rem;
   margin-top: 30px;
+}
+
+.ratingForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.ratingForm h3{
+  font-size: 1.5rem;
+}
+
+.submitRating{
+  background-color: black;
+    height: 45px;
+    font-size: medium;
+    margin-top: 20px;
 }
 
 /* Mobile responsive adjustments */
@@ -195,8 +215,9 @@
   }
 
   .deleteButton {
-    font-size: 14px; /* Smaller font size for the delete button */
+    font-size: 22px; /* Smaller font size for the delete button */
     padding: 6px 12px;
+    width: 80%;
   }
 
   .relatedRecipes .heading {
