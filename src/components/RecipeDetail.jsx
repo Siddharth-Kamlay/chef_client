@@ -42,9 +42,9 @@ const RecipeDetail = () => {
           const ratedRecipesRes = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-rated-recipes', {
             headers: { 'x-auth-token': token },
           });
-          const userRatedRecipe = ratedRecipesRes.data.find(r => r.recipeName === res.data.name);
+          const userRatedRecipe = ratedRecipesRes.data.find(r => r.name === res.data.name);
           if (userRatedRecipe) {
-            setRating(userRatedRecipe.rating);
+            setRating(userRatedRecipe.ratings);
           }
         }
 
