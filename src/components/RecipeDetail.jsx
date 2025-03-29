@@ -5,6 +5,7 @@ import Recipe from './RecipeFolder/Recipe';
 import axios from 'axios';
 import styles from './RecipeDetail.module.css';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
+import CommentSection from './CommentSection';
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -131,6 +132,8 @@ const RecipeDetail = () => {
     }
   };
 
+  const token = localStorage.getItem('token');
+
   return (
     <>
       <div className={styles.heading}>
@@ -249,6 +252,8 @@ const RecipeDetail = () => {
           <p>No related recipes found</p>
         )}
       </div>
+      
+      <CommentSection recipeId={id} authToken={token}/>
     </>
   );
 };

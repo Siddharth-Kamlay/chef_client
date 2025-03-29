@@ -135,10 +135,25 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
 
   // Function to calculate average rating
   const calculateAverageRating = (ratings) => {
-    if (!ratings || ratings.length === 0) return 0;
+    // If ratings is a number, return it directly
+    if (typeof ratings === 'number') {
+      return ratings.toFixed(1); // Ensure 1 decimal place
+    }
 
-    const total = ratings.reduce((acc, rating) => acc + rating.rating, 0);
-    return (total / ratings.length).toFixed(1);  // Round to 1 decimal place
+    // If ratings is an array, process the average
+    if (Array.isArray(ratings) && ratings.length > 0) {
+      const total = ratings.reduce((acc, rating) => {
+        if (rating && typeof rating.rating === 'number') {
+          return acc + rating.rating;
+        }
+        return acc; // Skip invalid ratings
+      }, 0);
+
+      return (total / ratings.length).toFixed(1);  // Round to 1 decimal place
+    }
+
+    // If ratings is neither a number nor a valid array, return 0
+    return 0;
   };
 
   // Function to render stars based on average rating

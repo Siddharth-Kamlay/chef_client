@@ -10,6 +10,7 @@ const Profile = () => {
   const { token } = useContext(AuthContext); 
   const [userRecipes, setUserRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
+  const [ratedRecipes, setRatedRecipes] = useState([]);  // New state for rated recipes
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userDetails, setUserDetails] = useState(null);
@@ -20,28 +21,28 @@ const Profile = () => {
   const [showPasswordChangeForm, setShowPasswordChangeForm] = useState(false); 
 
   useEffect(() => {
-    const fetchUserDetails = async() =>{
-      try{
-        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-details',{
-          headers:{'x-auth-token': token},
+    const fetchUserDetails = async() => {
+      try {
+        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-details', {
+          headers: {'x-auth-token': token},
         });
         setUserDetails(res.data);
-      }
-      catch{
-        setError("Error loading user details")
+      } catch {
+        setError("Error loading user details");
       }
     };
 
-    if(token){
+    if(token) {
       fetchUserDetails();
     }
-  },[token])
+  }, [token]);
+
   // Fetching user added recipes
   useEffect(() => {
     const fetchUserRecipes = async () => {
       try {
         const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-recipes', {
-          headers: { 'x-auth-token': token }, // Use token from context
+          headers: { 'x-auth-token': token }, 
         });
         setUserRecipes(res.data);
       } catch (err) {
@@ -61,7 +62,7 @@ const Profile = () => {
     const fetchSavedRecipes = async () => {
       try {
         const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-saved-recipes', {
-          headers: { 'x-auth-token': token }, // Use token from context
+          headers: { 'x-auth-token': token }, 
         });
         setSavedRecipes(res.data);
       } catch (err) {
@@ -69,13 +70,31 @@ const Profile = () => {
       }
     };
 
-    if (token) {  // Only fetch if token is available
+    if (token) { 
       fetchSavedRecipes();
     }
   }, [token]);
 
-   // Handle password change
-   const handlePasswordChange = async (e) => {
+  // Fetching rated recipes
+  useEffect(() => {
+    const fetchRatedRecipes = async () => {
+      try {
+        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-rated-recipes', {
+          headers: { 'x-auth-token': token }, 
+        });
+        setRatedRecipes(res.data);
+      } catch (err) {
+        setError('Error loading rated recipes');
+      }
+    };
+
+    if (token) { 
+      fetchRatedRecipes();
+    }
+  }, [token]);
+
+  // Handle password change
+  const handlePasswordChange = async (e) => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
@@ -89,7 +108,7 @@ const Profile = () => {
         { oldPassword, newPassword },
         { headers: { 'x-auth-token': token } }
       );
-      setPasswordChangeMessage(res.data.msg); // Show success message
+      setPasswordChangeMessage(res.data.msg);
       setOldPassword('');
       setNewPassword('');
       setConfirmPassword('');
@@ -127,7 +146,7 @@ const Profile = () => {
 
               {showPasswordChangeForm && 
                 <>
-                  <div className={styles.modalBackdrop} onClick={togglePasswordChangeForm}></div> {/* Modal Backdrop */}
+                  <div className={styles.modalBackdrop} onClick={togglePasswordChangeForm}></div> 
                   <div className={styles.formContainer}>
                     <h2>Change Password</h2>
                     {passwordChangeMessage && <p>{passwordChangeMessage}</p>}
@@ -174,13 +193,20 @@ const Profile = () => {
             <Recipe recipes={userRecipes} showRegion={false} group={false}/>
           )}
 
-          {/* Section for Saved Recipes */}
           <h1>Your Saved Recipes</h1>
           {savedRecipes.length === 0 ? (
             <h2>No saved recipes yet</h2>
           ) : (
             <Recipe recipes={savedRecipes} />
+          )} 
+
+          <h1>Your Rated Recipes</h1>
+          {ratedRecipes.length === 0 ? (
+            <h2>You havent rated any recipes yet</h2>
+          ) : (
+            <Recipe recipes={ratedRecipes} showRegion={false} group={false} />
           )}
+
         </>
       )}
     </div>
