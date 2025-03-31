@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { FaThumbsUp } from 'react-icons/fa'; // Import the thumbs up icon
 
 const CommentSection = ({ recipeId, authToken }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [image, setImage] = useState(null);
 
-  // Fetch comments when the component mounts
   useEffect(() => {
     fetchComments();
   }, [recipeId]);
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${recipeId}/comments`);
+      const response = await axios.get(`http://localhost:5000/api/recipes/${recipeId}/comments`);
       setComments(response.data);
     } catch (error) {
       console.error('Error fetching comments:', error);
@@ -31,7 +31,7 @@ const CommentSection = ({ recipeId, authToken }) => {
     }
 
     try {
-      await axios.post(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${recipeId}/comment`, formData, {
+      await axios.post(`http://localhost:5000/api/recipes/${recipeId}/comment`, formData, {
         headers: {
           'x-auth-token': authToken,
           'Content-Type': 'multipart/form-data'
@@ -39,9 +39,25 @@ const CommentSection = ({ recipeId, authToken }) => {
       });
       setNewComment('');
       setImage(null);
-      fetchComments(); // Refresh comments after posting
+      fetchComments();
     } catch (error) {
       console.error('Error posting comment:', error);
+    }
+  };
+
+  // ✅ Handle Like Functionality
+  const handleLike = async (commentId, recipeId) => {
+    try {
+      await axios.post(
+        `http://localhost:5000/api/comments/${commentId}/like`,
+        { recipeId },
+        {
+          headers: { 'x-auth-token': authToken },
+        }
+      );
+      fetchComments(); // Refresh comments to show updated like count
+    } catch (error) {
+      console.error('Error liking comment:', error);
     }
   };
 
@@ -49,19 +65,24 @@ const CommentSection = ({ recipeId, authToken }) => {
     <div>
       <h3>Comments</h3>
 
-      {/* Display existing comments */}
       {comments.length > 0 ? (
         comments.map((comment) => (
           <div key={comment._id} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
-            <p><strong>{comment.userId.username}:</strong> {comment.comment}</p>
+            <p><strong>{comment.username}:</strong> {comment.comment}</p>
             {comment.image && <img src={comment.image} alt="comment" style={{ maxWidth: '200px' }} />}
+            {console.log(comment)}
+            {/* Thumbs up icon instead of button */}
+            <FaThumbsUp
+              onClick={() => handleLike(comment._id, recipeId)} 
+              style={{ cursor: 'pointer', color: comment.liked ? 'blue' : 'gray' }}
+            />
+            <span>{` (${comment.likedBy.length})`}</span>
           </div>
         ))
       ) : (
         <p>No comments yet. Be the first to comment!</p>
       )}
 
-      {/* Add new comment */}
       <form onSubmit={handleCommentSubmit}>
         <textarea
           value={newComment}
