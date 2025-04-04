@@ -206,7 +206,7 @@ const Profile = () => {
           ) : (
             <Recipe recipes={ratedRecipes} showRegion={false} group={false} />
           )}
-
+          {console.log(ratedRecipes)}
         </>
       )}
     </div>

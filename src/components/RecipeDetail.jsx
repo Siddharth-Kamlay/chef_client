@@ -45,6 +45,8 @@ const RecipeDetail = () => {
           const userRatedRecipe = ratedRecipesRes.data.find(r => r.name === res.data.name);
           if (userRatedRecipe) {
             setRating(userRatedRecipe.ratings);
+            console.log('first')
+            console.log(userRatedRecipe)
           }
         }
 
