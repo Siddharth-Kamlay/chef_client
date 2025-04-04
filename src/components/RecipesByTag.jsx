@@ -11,7 +11,7 @@ const RecipesByTag = () => {
   useEffect(() => {
     const fetchRecipesByTag = async () => {
       try {
-        const response = await axios.get(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes-by-tag/${tag}`);
+        const response = await axios.get(`https://chef-server-dusky.vercel.app/api/recipes-by-tag/${tag}`);
         setRecipes(response.data);
       } catch (error) {
         console.error('Error fetching recipes by tag:', error);

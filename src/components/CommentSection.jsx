@@ -17,7 +17,7 @@ const CommentSection = ({ recipeId, authToken }) => {
 
   const fetchUserId = async () => {
     try {
-      const response = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/get-user-id', {
+      const response = await axios.get('https://chef-server-dusky.vercel.app/api/get-user-id', {
         headers: { 'x-auth-token': authToken },
       });
       setUserId(response.data.userId);
@@ -28,7 +28,7 @@ const CommentSection = ({ recipeId, authToken }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${recipeId}/comments`);
+      const response = await axios.get(`https://chef-server-dusky.vercel.app/api/recipes/${recipeId}/comments`);
       setComments(response.data);
     } catch (error) {
       console.error('Error fetching comments:', error);
@@ -42,7 +42,7 @@ const CommentSection = ({ recipeId, authToken }) => {
     if (image) formData.append('image', image);
 
     try {
-      await axios.post(`https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${recipeId}/comment`, formData, {
+      await axios.post(`https://chef-server-dusky.vercel.app/api/recipes/${recipeId}/comment`, formData, {
         headers: { 'x-auth-token': authToken, 'Content-Type': 'multipart/form-data' },
       });
       setNewComment('');
@@ -56,7 +56,7 @@ const CommentSection = ({ recipeId, authToken }) => {
   const handleLike = async (commentId) => {
     try {
       await axios.post(
-        `https://chef-server-ab7f1dad1bb4.herokuapp.com/api/comments/${commentId}/like`,
+        `https://chef-server-dusky.vercel.app/api/comments/${commentId}/like`,
         { recipeId },
         { headers: { 'x-auth-token': authToken } }
       );
@@ -69,7 +69,7 @@ const CommentSection = ({ recipeId, authToken }) => {
   const handleDeleteComment = async (commentId) => {
     try {
       await axios.delete(
-        `https://chef-server-ab7f1dad1bb4.herokuapp.com/api/recipes/${recipeId}/comments/${commentId}`,
+        `https://chef-server-dusky.vercel.app/api/recipes/${recipeId}/comments/${commentId}`,
         { headers: { 'x-auth-token': authToken } }
       );
       setCommentToDelete(null); // Reset deletion state
