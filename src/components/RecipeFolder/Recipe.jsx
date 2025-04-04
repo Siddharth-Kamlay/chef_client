@@ -16,7 +16,7 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
         const token = localStorage.getItem('token');
         if (!token) return;
 
-        const response = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-saved-recipes', {
+        const response = await axios.get('https://server-two-psi-57.vercel.app/api/user-saved-recipes', {
           headers: {
             'x-auth-token': token,
           },
@@ -54,7 +54,7 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
       }
 
       const response = await axios.post(
-        `https://chef-server-ab7f1dad1bb4.herokuapp.com/api/save-recipe/${recipeId}`,
+        `https://server-two-psi-57.vercel.app/api/save-recipe/${recipeId}`,
         {},
         {
           headers: {
@@ -91,7 +91,7 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
       }
 
       const response = await axios.post(
-        `https://chef-server-ab7f1dad1bb4.herokuapp.com/api/unsave-recipe/${recipeId}`,
+        `https://server-two-psi-57.vercel.app/api/unsave-recipe/${recipeId}`,
         {},
         {
           headers: {
