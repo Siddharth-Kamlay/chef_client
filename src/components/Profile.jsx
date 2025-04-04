@@ -23,7 +23,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserDetails = async() => {
       try {
-        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-details', {
+        const res = await axios.get('https://chef-server-dusky.vercel.app/api/user-details', {
           headers: {'x-auth-token': token},
         });
         setUserDetails(res.data);
@@ -41,7 +41,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserRecipes = async () => {
       try {
-        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-recipes', {
+        const res = await axios.get('https://chef-server-dusky.vercel.app/api/user-recipes', {
           headers: { 'x-auth-token': token }, 
         });
         setUserRecipes(res.data);
@@ -61,7 +61,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
-        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-saved-recipes', {
+        const res = await axios.get('https://chef-server-dusky.vercel.app/api/user-saved-recipes', {
           headers: { 'x-auth-token': token }, 
         });
         setSavedRecipes(res.data);
@@ -79,7 +79,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchRatedRecipes = async () => {
       try {
-        const res = await axios.get('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/user-rated-recipes', {
+        const res = await axios.get('https://chef-server-dusky.vercel.app/api/user-rated-recipes', {
           headers: { 'x-auth-token': token }, 
         });
         setRatedRecipes(res.data);
@@ -104,7 +104,7 @@ const Profile = () => {
 
     try {
       const res = await axios.put(
-        'https://chef-server-ab7f1dad1bb4.herokuapp.com/api/change-password',
+        'https://chef-server-dusky.vercel.app/api/change-password',
         { oldPassword, newPassword },
         { headers: { 'x-auth-token': token } }
       );

@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const res = await axios.post('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/login', { email, password });
+            const res = await axios.post('https://chef-server-dusky.vercel.app/api/login', { email, password });
             setToken(res.data.token);
             localStorage.setItem('token', res.data.token);
             return true;
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (username, email, password) => {
         try {
-            const res = await axios.post('https://chef-server-ab7f1dad1bb4.herokuapp.com/api/signup', { username, email, password });
+            const res = await axios.post('https://chef-server-dusky.vercel.app/api/signup', { username, email, password });
             setToken(res.data.token);
             localStorage.setItem('token', res.data.token);
             return true;
