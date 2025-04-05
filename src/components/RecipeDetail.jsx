@@ -45,8 +45,6 @@ const RecipeDetail = () => {
           const userRatedRecipe = ratedRecipesRes.data.find(r => r.name === res.data.name);
           if (userRatedRecipe) {
             setRating(userRatedRecipe.ratings);
-            console.log('first')
-            console.log(userRatedRecipe)
           }
         }
 
@@ -246,6 +244,8 @@ const RecipeDetail = () => {
         {ratingMessage && <p>{ratingMessage}</p>}
       </div>
 
+      <CommentSection recipeId={id} authToken={token} ratings={recipe.ratings}/>
+      
       <div className={styles.relatedRecipes}>
         <h3 className={styles.heading}>Recommended Recipes:</h3>
         {relatedRecipes.length > 0 ? (
@@ -253,9 +253,7 @@ const RecipeDetail = () => {
         ) : (
           <p>No related recipes found</p>
         )}
-      </div>
-      
-      <CommentSection recipeId={id} authToken={token}/>
+      </div> 
     </>
   );
 };

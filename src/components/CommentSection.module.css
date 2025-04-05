@@ -1,0 +1,36 @@
+h3{
+    font-size: 1.5rem;
+}
+
+.commentUsername{
+    display: flex;
+    font-size: 1.5rem;
+}
+
+.commentDetails{
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentComment{
+    font-size: 1.25rem;
+    display: flex;
+}
+
+.likes_delete{
+    display: flex;
+}
+
+.editCommentForm{
+    width: 100%;
+    font-size: 1.25rem;
+}
+
+.editButtons{
+    display: flex;
+    justify-content: space-around;
+}
+
+.editButtons button{
+    background-color: black;
+}
