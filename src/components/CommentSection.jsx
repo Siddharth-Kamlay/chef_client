@@ -185,15 +185,12 @@ const CommentSection = ({ recipeId, authToken, ratings }) => {
             {comment.userId === userId && commentToDelete === comment._id && (
               <div
                 style={{
-                  position: 'absolute',
-                  backgroundColor: 'rgba(0,0,0,0.7)',
+                  backgroundColor: 'rgba(0,0,0,0.8)',
                   color: 'white',
-                  padding: '20px',
+                  padding: '10px',
                   borderRadius: '5px',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  zIndex: 1000,
+                  marginTop: '10px',
+                  display: 'inline-block',
                 }}
               >
                 <p>Are you sure you want to delete this comment?</p>

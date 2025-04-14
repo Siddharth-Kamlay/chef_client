@@ -112,7 +112,6 @@ const Profile = () => {
       setOldPassword('');
       setNewPassword('');
       setConfirmPassword('');
-      console.log(passwordChangeMessage)
     } catch (err) {
       setPasswordChangeMessage('Error changing password');
     }
@@ -206,7 +205,6 @@ const Profile = () => {
           ) : (
             <Recipe recipes={ratedRecipes} showRegion={false} group={false} />
           )}
-          {console.log(ratedRecipes)}
         </>
       )}
     </div>
