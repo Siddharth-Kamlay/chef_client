@@ -25,12 +25,12 @@ const RecipeDetail = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const res = await axios.get(`https://chef-server-dusky.vercel.app/api/recipes/${id}`);
+        const res = await axios.get(`https://chef-server-kchf.onrender.com/api/recipes/${id}`);
         setRecipe(res.data);
 
         const token = localStorage.getItem('token');
         if (token) {
-          const userRes = await axios.get('https://chef-server-dusky.vercel.app/api/get-user-id', {
+          const userRes = await axios.get('https://chef-server-kchf.onrender.com/api/get-user-id', {
             headers: { 'x-auth-token': token },
           });
           setCurrentUserId(userRes.data.userId);
@@ -39,7 +39,7 @@ const RecipeDetail = () => {
           }
 
           // Fetch user-rated recipes and check if the user has rated the current recipe
-          const ratedRecipesRes = await axios.get('https://chef-server-dusky.vercel.app/api/user-rated-recipes', {
+          const ratedRecipesRes = await axios.get('https://chef-server-kchf.onrender.com/api/user-rated-recipes', {
             headers: { 'x-auth-token': token },
           });
           const userRatedRecipe = ratedRecipesRes.data.find(r => r.name === res.data.name);
@@ -50,7 +50,7 @@ const RecipeDetail = () => {
 
         if (res.data.tags && res.data.tags.length > 0) {
           const tagRequests = res.data.tags.map((tag) =>
-            axios.get(`https://chef-server-dusky.vercel.app/api/recipes-by-tag/${tag}`)
+            axios.get(`https://chef-server-kchf.onrender.com/api/recipes-by-tag/${tag}`)
           );
           const tagResponses = await Promise.all(tagRequests);
           const allRelatedRecipes = tagResponses.flatMap(response => response.data);
@@ -72,7 +72,7 @@ const RecipeDetail = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://chef-server-dusky.vercel.app/api/recipes/${id}`, {
+      await axios.delete(`https://chef-server-kchf.onrender.com/api/recipes/${id}`, {
         headers: { 'x-auth-token': localStorage.getItem('token') },
       });
       navigate('/');
@@ -97,7 +97,7 @@ const RecipeDetail = () => {
     }
     try {
       const res = await axios.post(
-        `https://chef-server-dusky.vercel.app/api/rate-recipe/${id}`,
+        `https://chef-server-kchf.onrender.com/api/rate-recipe/${id}`,
         { rating },
         { headers: { 'x-auth-token': token } }
       );
