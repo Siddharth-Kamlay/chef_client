@@ -16,7 +16,7 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
         const token = localStorage.getItem('token');
         if (!token) return;
 
-        const response = await axios.get('https://chef-server-dusky.vercel.app/api/user-saved-recipes', {
+        const response = await axios.get('https://chef-server-kchf.onrender.com/api/user-saved-recipes', {
           headers: {
             'x-auth-token': token,
           },
@@ -54,7 +54,7 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
       }
 
       const response = await axios.post(
-        `https://chef-server-dusky.vercel.app/api/save-recipe/${recipeId}`,
+        `https://chef-server-kchf.onrender.com/api/save-recipe/${recipeId}`,
         {},
         {
           headers: {
@@ -91,7 +91,7 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
       }
 
       const response = await axios.post(
-        `https://chef-server-dusky.vercel.app/api/unsave-recipe/${recipeId}`,
+        `https://chef-server-kchf.onrender.com/api/unsave-recipe/${recipeId}`,
         {},
         {
           headers: {

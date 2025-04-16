@@ -23,7 +23,7 @@ const Home = () => {
     // Fetch default recipes on page load
     const fetchDefaultRecipes = async () => {
       try {
-        const res = await axios.get('https://chef-server-dusky.vercel.app/api/recipes');
+        const res = await axios.get('https://chef-server-kchf.onrender.com/api/recipes');
         setRecipes(res.data);
       } catch (err) {
         setError('Error loading recipes');
@@ -53,7 +53,7 @@ const Home = () => {
         ? { ingredients: inputValue.split(',').map(item => item.trim()).join(',') }
         : { name: inputValue };
   
-      const res = await axios.get('https://chef-server-dusky.vercel.app/api/recipes', { params });
+      const res = await axios.get('https://chef-server-kchf.onrender.com/api/recipes', { params });
   
       if (res.data.length === 0) {
         setError('No recipes found. Please try again with different search criteria.');
