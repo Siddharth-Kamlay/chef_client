@@ -6,6 +6,7 @@ import axios from 'axios';
 import styles from './RecipeDetail.module.css';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import CommentSection from './CommentSection';
+import api from '../api/apiConfig';
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -25,21 +26,20 @@ const RecipeDetail = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const res = await axios.get(`https://chef-server-kchf.onrender.com/api/recipes/${id}`);
+        const res = await api.get(`/api/recipes/${id}`);
         setRecipe(res.data);
 
         const token = localStorage.getItem('token');
         if (token) {
-          const userRes = await axios.get('https://chef-server-kchf.onrender.com/api/get-user-id', {
+          const userRes = await api.get('/api/get-user-id', {
             headers: { 'x-auth-token': token },
           });
           setCurrentUserId(userRes.data.userId);
           if (res.data.userId === userRes.data.userId) {
             setIsOwner(true);
           }
-
-          // Fetch user-rated recipes and check if the user has rated the current recipe
-          const ratedRecipesRes = await axios.get('https://chef-server-kchf.onrender.com/api/user-rated-recipes', {
+ 
+          const ratedRecipesRes = await api.get('/api/user-rated-recipes', {
             headers: { 'x-auth-token': token },
           });
           const userRatedRecipe = ratedRecipesRes.data.find(r => r.name === res.data.name);
@@ -50,7 +50,7 @@ const RecipeDetail = () => {
 
         if (res.data.tags && res.data.tags.length > 0) {
           const tagRequests = res.data.tags.map((tag) =>
-            axios.get(`https://chef-server-kchf.onrender.com/api/recipes-by-tag/${tag}`)
+            api.get(`/api/recipes-by-tag/${tag}`)
           );
           const tagResponses = await Promise.all(tagRequests);
           const allRelatedRecipes = tagResponses.flatMap(response => response.data);
@@ -72,7 +72,7 @@ const RecipeDetail = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://chef-server-kchf.onrender.com/api/recipes/${id}`, {
+      await api.delete(`/api/recipes/${id}`, {
         headers: { 'x-auth-token': localStorage.getItem('token') },
       });
       navigate('/');
@@ -96,8 +96,8 @@ const RecipeDetail = () => {
       return;
     }
     try {
-      const res = await axios.post(
-        `https://chef-server-kchf.onrender.com/api/rate-recipe/${id}`,
+      const res = await api.post(
+        `/api/rate-recipe/${id}`,
         { rating },
         { headers: { 'x-auth-token': token } }
       );

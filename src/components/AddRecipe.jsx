@@ -1,7 +1,7 @@
 import { useState } from "react";
-import axios from "axios";
 import styles from "./AddRecipe.module.css"; // Import the CSS module
 import CreatableSelect from "react-select/creatable";
+import api from '../api/apiConfig'
 
 const regionOptions = [
   { value: "North Indian", label: "North Indian" },
@@ -198,8 +198,7 @@ const AddRecipe = () => {
     });
 
     try {
-      console.log([...formDataToSend.entries()]);
-      const response = await axios.post("https://chef-server-kchf.onrender.com/api/add-recipes", formDataToSend, {
+      const response = await api.post("/api/add-recipes", formDataToSend, {
         headers: {
           "x-auth-token": token,
           "Content-Type": "multipart/form-data",

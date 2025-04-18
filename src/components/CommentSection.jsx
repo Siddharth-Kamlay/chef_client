@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 import { FaThumbsUp, FaTrashAlt, FaStar, FaRegStar, FaStarHalfAlt, FaPen } from 'react-icons/fa';
 import styles from './CommentSection.module.css';
+import api from '../api/apiConfig';
 
 const CommentSection = ({ recipeId, authToken, ratings }) => {
   const [comments, setComments] = useState([]);
@@ -21,7 +21,7 @@ const CommentSection = ({ recipeId, authToken, ratings }) => {
 
   const fetchUserId = async () => {
     try {
-      const response = await axios.get('https://chef-server-kchf.onrender.com/api/get-user-id', {
+      const response = await api.get('/api/get-user-id', {
         headers: { 'x-auth-token': authToken },
       });
       setUserId(response.data.userId);
@@ -32,7 +32,7 @@ const CommentSection = ({ recipeId, authToken, ratings }) => {
 
   const fetchComments = async () => {
     try {
-      const response = await axios.get(`https://chef-server-kchf.onrender.com/api/recipes/${recipeId}/comments`);
+      const response = await api.get(`/api/recipes/${recipeId}/comments`);
       const updatedComments = response.data.map((comment) => {
         const userRating = ratings.find((rating) => rating.userId === comment.userId);
         return { ...comment, rating: userRating ? userRating.rating : null };
@@ -50,7 +50,7 @@ const CommentSection = ({ recipeId, authToken, ratings }) => {
     if (image) formData.append('image', image);
 
     try {
-      await axios.post(`https://chef-server-kchf.onrender.com/api/recipes/${recipeId}/comment`, formData, {
+      await api.post(`/api/recipes/${recipeId}/comment`, formData, {
         headers: { 'x-auth-token': authToken, 'Content-Type': 'multipart/form-data' },
       });
       setNewComment('');
@@ -63,8 +63,8 @@ const CommentSection = ({ recipeId, authToken, ratings }) => {
 
   const handleLike = async (commentId) => {
     try {
-      await axios.post(
-        `https://chef-server-kchf.onrender.com/api/comments/${commentId}/like`,
+      await api.post(
+        `/api/comments/${commentId}/like`,
         { recipeId },
         { headers: { 'x-auth-token': authToken } }
       );
@@ -76,8 +76,8 @@ const CommentSection = ({ recipeId, authToken, ratings }) => {
 
   const handleDeleteComment = async (commentId) => {
     try {
-      await axios.delete(
-        `https://chef-server-kchf.onrender.com/api/recipes/${recipeId}/comments/${commentId}`,
+      await api.delete(
+        `/api/recipes/${recipeId}/comments/${commentId}`,
         { headers: { 'x-auth-token': authToken } }
       );
       setCommentToDelete(null);
@@ -90,8 +90,8 @@ const CommentSection = ({ recipeId, authToken, ratings }) => {
   const handleEditCommentSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(
-        `https://chef-server-kchf.onrender.com/api/recipes/${recipeId}/comments/${commentBeingEdited}`,
+      await api.put(
+        `/api/recipes/${recipeId}/comments/${commentBeingEdited}`,
         { comment: editComment },
         { headers: { 'x-auth-token': authToken } }
       );

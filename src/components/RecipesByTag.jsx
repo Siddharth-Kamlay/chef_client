@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';  // Import Link
 import styles from './RecipesByTags.module.css';
+import api from '../api/apiConfig';
 
 const RecipesByTag = () => {
   const { tag } = useParams();  // Get the tag from the URL
@@ -11,7 +11,7 @@ const RecipesByTag = () => {
   useEffect(() => {
     const fetchRecipesByTag = async () => {
       try {
-        const response = await axios.get(`https://chef-server-kchf.onrender.com/api/recipes-by-tag/${tag}`);
+        const response = await api.get(`/api/recipes-by-tag/${tag}`);
         setRecipes(response.data);
       } catch (error) {
         console.error('Error fetching recipes by tag:', error);

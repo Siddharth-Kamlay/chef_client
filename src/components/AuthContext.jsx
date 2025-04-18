@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types'
+import api from '../api/apiConfig';
 
 const AuthContext = createContext();
 
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const res = await axios.post('https://chef-server-kchf.onrender.com/api/login', { email, password });
+            const res = await api.post('/api/login', { email, password });
             setToken(res.data.token);
             localStorage.setItem('token', res.data.token);
             return true;
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (username, email, password) => {
         try {
-            const res = await axios.post('https://chef-server-kchf.onrender.com/api/signup', { username, email, password });
+            const res = await api.post('/api/signup', { username, email, password });
             setToken(res.data.token);
             localStorage.setItem('token', res.data.token);
             return true;

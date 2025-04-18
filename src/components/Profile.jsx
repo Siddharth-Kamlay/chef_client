@@ -5,6 +5,7 @@ import axios from 'axios';
 import Recipe from './RecipeFolder/Recipe';
 import AuthContext from './AuthContext';
 import styles from './Profile.module.css'
+import api from '../api/apiConfig';
 
 const Profile = () => {
   const { token } = useContext(AuthContext); 
@@ -23,7 +24,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserDetails = async() => {
       try {
-        const res = await axios.get('https://chef-server-kchf.onrender.com/api/user-details', {
+        const res = await api.get('/api/user-details', {
           headers: {'x-auth-token': token},
         });
         setUserDetails(res.data);
@@ -41,7 +42,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserRecipes = async () => {
       try {
-        const res = await axios.get('https://chef-server-kchf.onrender.com/api/user-recipes', {
+        const res = await api.get('/api/user-recipes', {
           headers: { 'x-auth-token': token }, 
         });
         setUserRecipes(res.data);
@@ -61,7 +62,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchSavedRecipes = async () => {
       try {
-        const res = await axios.get('https://chef-server-kchf.onrender.com/api/user-saved-recipes', {
+        const res = await api.get('/api/user-saved-recipes', {
           headers: { 'x-auth-token': token }, 
         });
         setSavedRecipes(res.data);
@@ -79,7 +80,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchRatedRecipes = async () => {
       try {
-        const res = await axios.get('https://chef-server-kchf.onrender.com/api/user-rated-recipes', {
+        const res = await api.get('/api/user-rated-recipes', {
           headers: { 'x-auth-token': token }, 
         });
         setRatedRecipes(res.data);
@@ -103,8 +104,8 @@ const Profile = () => {
     }
 
     try {
-      const res = await axios.put(
-        'https://chef-server-kchf.onrender.com/api/change-password',
+      const res = await api.put(
+        '/api/change-password',
         { oldPassword, newPassword },
         { headers: { 'x-auth-token': token } }
       );

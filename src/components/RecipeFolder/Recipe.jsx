@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FaShareAlt, FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';  // Import React Icons for stars
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../../api/apiConfig';
 
 const Recipe = ({ recipes, showRegion = true, group = true }) => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
         const token = localStorage.getItem('token');
         if (!token) return;
 
-        const response = await axios.get('https://chef-server-kchf.onrender.com/api/user-saved-recipes', {
+        const response = await api.get('/api/user-saved-recipes', {
           headers: {
             'x-auth-token': token,
           },
@@ -53,8 +53,8 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
         return;
       }
 
-      const response = await axios.post(
-        `https://chef-server-kchf.onrender.com/api/save-recipe/${recipeId}`,
+      const response = await api.post(
+        `/api/save-recipe/${recipeId}`,
         {},
         {
           headers: {
@@ -90,8 +90,8 @@ const Recipe = ({ recipes, showRegion = true, group = true }) => {
         return;
       }
 
-      const response = await axios.post(
-        `https://chef-server-kchf.onrender.com/api/unsave-recipe/${recipeId}`,
+      const response = await api.post(
+        `/api/unsave-recipe/${recipeId}`,
         {},
         {
           headers: {
